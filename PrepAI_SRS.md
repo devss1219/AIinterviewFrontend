@@ -1,5 +1,5 @@
 # Software Requirements Specification (SRS)
-## PrepAI — AI-Powered Resume Analyser
+## GalactusAI — AI-Powered Resume Analyser
 
 **Version:** 1.0  
 **Date:** April 2026  
@@ -10,7 +10,7 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
-PrepAI is an AI-powered web application that analyses a user's resume and provides detailed feedback including ATS score, strengths, weaknesses, missing keywords, and suitable job roles.
+GalactusAI is an AI-powered web application that analyses a user's resume and provides detailed feedback including ATS score, strengths, weaknesses, missing keywords, and suitable job roles.
 
 ### 1.2 Scope
 - Users can upload their resume (PDF format)
@@ -161,4 +161,4 @@ Body: resume = <PDF file>
 
 ---
 
-*Document prepared for PrepAI v1.0 — April 2026*
+*Document prepared for GalactusAI v1.0 — April 2026*
