@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #040110;
+  /* Slightly richer Slate 950 black */
+  color: white;
+  overflow-x: hidden;
+  /* Smooth font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 1. Organic Twinkling Stars --- */
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(0.6);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    /* Stars glow slightly when fully visible */
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8), 0 0 12px rgba(167, 139, 250, 0.4);
+  }
+}
+
+.star {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: twinkle 4s ease-in-out infinite;
+  /* Slower, more natural blink */
+  will-change: opacity, transform;
+  /* Performance boost */
+}
+
+/* --- 2. Premium Neon Utilities --- */
+.neon-border {
+  /* Layered box-shadow for realistic neon tube effect */
+  box-shadow:
+    0 0 10px rgba(168, 85, 247, 0.4),
+    inset 0 0 15px rgba(168, 85, 247, 0.2),
+    0 0 30px rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(216, 180, 254, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neon-border:hover {
+  box-shadow:
+    0 0 15px rgba(247, 171, 85, 0.6),
+    inset 0 0 20px rgba(168, 85, 247, 0.3),
+    0 0 50px rgba(168, 85, 247, 0.3);
+  border-color: rgba(216, 180, 254, 0.6);
+}
+
+.neon-text {
+  text-shadow:
+    0 0 5px rgba(56, 189, 248, 0.8),
+    0 0 15px rgba(56, 189, 248, 0.5),
+    0 0 30px rgba(56, 189, 248, 0.3);
+}
+
+/* --- 3. Masterpiece Interview Heading --- */
+
+/* Buttery smooth shimmer with custom bezier curve */
+@keyframes shimmerSweep {
+  0% {
+    background-position: 200% center;
+  }
+
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* Float & Breathe - Hardware accelerated to prevent text jitter */
+@keyframes breatheFloat {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+/* Snap-in and explosive pulse for the underline */
+@keyframes rulePulse {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+    filter: brightness(1);
+  }
+
+  40% {
+    transform: scaleX(1);
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+.interview-heading {
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+
+  /* Blue → Cyan → Emerald Green gradient */
+  background: linear-gradient(110deg,
+      #1d4ed8 0%,
+      #0ea5e9 25%,
+      #06b6d4 45%,
+      #8a0ed2 70%,
+      #bdfc00 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Crisp subtle cyan edge glow — no bloom */
+  filter: drop-shadow(0 0 3px rgba(6, 182, 212, 0.45));
+
+  will-change: transform, background-position;
+  backface-visibility: hidden;
+  /* Prevent clipping of cursive ascenders & descenders */
+  overflow: visible;
+
+  animation:
+    shimmerSweep 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite,
+    breatheFloat 6s ease-in-out infinite;
+
+  display: inline-block;
+  /* Generous padding so no letter edge is clipped */
+  padding: 0.15em 0.3em;
+  line-height: 1.2;
+  position: relative;
+}
+
+/* --- 4. Blue-Green Underline --- */
+.interview-rule {
+  height: 1px;
+  width: 0;
+  margin: 0.1rem auto 0;
+  border-radius: 9999px;
+
+  /* Matches the blue-green text gradient */
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(233, 138, 14, 0.5) 20%,
+      rgba(16, 185, 129, 0.9) 50%,
+      rgba(14, 165, 233, 0.5) 80%,
+      transparent 100%);
+
+  /* Tight cyan glow only */
+  box-shadow: 0 0 5px rgba(6, 182, 212, 0.3);
+
+  transform-origin: center;
+  animation: rulePulse 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
