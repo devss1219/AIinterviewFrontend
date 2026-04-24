@@ -288,7 +288,7 @@ function App() {
 
   const handleStartInterview = async () => {
     if (!file) {
-      alert("Please initialize with a Resume first!");
+      alert("Please upload your Resume first!");
       return;
     }
 
@@ -301,7 +301,7 @@ function App() {
         headers: { "Content-Type": "multipart/form-data" }
       });
       console.log("AI Extracted Data:", response.data);
-      alert(`System Online! Resume parsed successfully. Ready to begin.`);
+      alert(`System Online! Resume analysed successfully. Enhancements ready.`);
     } catch (error) {
       console.error("Upload error:", error);
       alert("Connection to AI Core failed. Check server status.");
@@ -324,7 +324,7 @@ function App() {
         {/* Status pill */}
         <div className="flex items-center space-x-2 px-4 py-1.5 bg-slate-900/40 border border-slate-700/40 rounded-full backdrop-blur-md shadow-[0_0_15px_rgba(236,72,153,0.1)]">
           <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse shadow-[0_0_8px_#ec4899]" />
-          <span className="text-[10px] sm:text-xs font-mono text-pink-300 tracking-[0.2em]">NEURAL INTERVIEW ENGINE V3.0</span>
+          <span className="text-[10px] sm:text-xs font-mono text-pink-300 tracking-[0.2em]">NEURAL RESUME ENGINE V3.0</span>
         </div>
 
         {/* Hero heading */}
@@ -333,7 +333,7 @@ function App() {
             className="font-mono tracking-[0.4em] uppercase leading-none mb-1 text-slate-200"
             style={{ fontSize: 'clamp(0.85rem, 2.2vw, 1.15rem)', textShadow: '0 0 12px rgba(148,163,184,0.4)' }}
           >
-            Ace Your Next
+            Supercharge Your
           </p>
 
           <div className="relative inline-block" style={{ overflow: 'visible' }}>
@@ -349,29 +349,29 @@ function App() {
               className="interview-heading relative leading-none"
               style={{ fontFamily: "'Great Vibes', cursive" }}
             >
-              Interview
+              Resume
             </h1>
             <div className="interview-rule" />
           </div>
 
           <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto mt-3 font-mono leading-relaxed">
-            Practice with an AI Copilot · Adaptive questioning · Real-time analysis
+            AI-powered suggestions · ATS optimisation · Real-time scoring
           </p>
         </div>
 
         {/* Stats row */}
         <div className="flex space-x-8 sm:space-x-14 py-2.5 border-y border-white/10">
           <div className="text-center group">
-            <div className="text-xl sm:text-2xl font-black text-emerald-400 group-hover:scale-110 transition-transform">5</div>
-            <div className="text-[9px] font-mono text-slate-300 tracking-widest uppercase mt-0.5">Questions</div>
+            <div className="text-xl sm:text-2xl font-black text-emerald-400 group-hover:scale-110 transition-transform">10+</div>
+            <div className="text-[9px] font-mono text-slate-300 tracking-widest uppercase mt-0.5">Improvements</div>
           </div>
           <div className="text-center group">
-            <div className="text-xl sm:text-2xl font-black text-blue-400 group-hover:scale-110 transition-transform">~12m</div>
-            <div className="text-[9px] font-mono text-slate-300 tracking-widest uppercase mt-0.5">Per Session</div>
+            <div className="text-xl sm:text-2xl font-black text-blue-400 group-hover:scale-110 transition-transform">~2m</div>
+            <div className="text-[9px] font-mono text-slate-300 tracking-widest uppercase mt-0.5">Analysis Time</div>
           </div>
           <div className="text-center group">
-            <div className="text-xl sm:text-2xl font-black text-pink-400 group-hover:scale-110 transition-transform">50</div>
-            <div className="text-[9px] font-mono text-slate-300 tracking-widest uppercase mt-0.5">Max Points</div>
+            <div className="text-xl sm:text-2xl font-black text-pink-400 group-hover:scale-110 transition-transform">ATS</div>
+            <div className="text-[9px] font-mono text-slate-300 tracking-widest uppercase mt-0.5">Optimised</div>
           </div>
         </div>
 
@@ -385,8 +385,8 @@ function App() {
               <Zap className="w-4 h-4 text-pink-500" />
             </div>
             <div>
-              <h2 className="text-sm text-white font-bold tracking-wide">Configure Your Session</h2>
-              <p className="text-[10px] font-mono text-slate-500 mt-0.5">Upload your resume to initialize AI context</p>
+              <h2 className="text-sm text-white font-bold tracking-wide">Enhance Your Resume</h2>
+              <p className="text-[10px] font-mono text-slate-500 mt-0.5">Upload your resume to initialise AI analysis</p>
             </div>
           </div>
 
@@ -400,7 +400,7 @@ function App() {
                 <UploadCloud className="w-6 h-6 text-slate-500 group-hover:text-pink-400 transition-colors" />
               </div>
               <p className="text-xs font-mono text-slate-500 group-hover:text-pink-300 transition-colors">
-                {file ? "Deploy a different Profile" : "Click to deploy Resume (PDF)"}
+                {file ? "Upload a different Resume" : "Click to upload Resume (PDF)"}
               </p>
             </div>
             <input
@@ -443,7 +443,7 @@ function App() {
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             )}
             <span className="tracking-[0.2em] uppercase">
-              {isUploading ? "Extracting Data..." : "Initialise Session"}
+              {isUploading ? "Analysing Resume..." : "Enhance My Resume"}
             </span>
           </button>
 
