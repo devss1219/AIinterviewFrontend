@@ -371,6 +371,23 @@ function App() {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseout', () => { mouse.x = -1000; mouse.y = -1000; });
 
+    // Touch burst — activate star scatter on tap for mobile
+    let touchTimeout = null;
+    const handleTouch = (e) => {
+      if (!isMobile) return;
+      const touch = e.touches[0] || e.changedTouches[0];
+      if (!touch) return;
+      mouse.x = touch.clientX;
+      mouse.y = touch.clientY;
+      mouse.radius = 200;
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        mouse.x = -1000; mouse.y = -1000; mouse.radius = 0;
+      }, 500);
+    };
+    window.addEventListener('touchstart', handleTouch, { passive: true });
+    window.addEventListener('touchmove', handleTouch, { passive: true });
+
     class GalaxyParticle {
       constructor() {
         this.centerX = canvas.width / 2; this.centerY = canvas.height / 2;
@@ -490,7 +507,14 @@ function App() {
     };
 
     init(); animate();
-    return () => { cancelAnimationFrame(animationFrameId); window.removeEventListener('resize', setCanvasSize); window.removeEventListener('mousemove', handleMouseMove); };
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', setCanvasSize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchstart', handleTouch);
+      window.removeEventListener('touchmove', handleTouch);
+      clearTimeout(touchTimeout);
+    };
   }, []);
 
   return (
