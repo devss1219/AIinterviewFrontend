@@ -238,7 +238,7 @@ function UploadPage({ onResult }) {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center h-screen px-4 gap-3 sm:gap-4">
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 gap-3 sm:gap-4 upload-page-container">
 
       {/* Status pill */}
       <div className="flex items-center space-x-2 px-4 py-1.5 bg-slate-900/40 border border-slate-700/40 rounded-full backdrop-blur-md shadow-[0_0_15px_rgba(236,72,153,0.1)]">
@@ -518,7 +518,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#020617] text-slate-300 font-sans overflow-x-hidden selection:bg-pink-500/30">
+    <div className="relative min-h-screen bg-[#020617] text-slate-300 font-sans overflow-x-hidden selection:bg-pink-500/30 app-root">
       <StarCanvas canvasRef={canvasRef} />
       {result
         ? <ResultsPage result={result} fileName={fileName} onBack={handleBack} />

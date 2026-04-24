@@ -12,6 +12,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Fix viewport height — 100vh includes browser chrome (address bar, taskbar) on Windows/Android.
+   dvh (dynamic viewport height) is the actual visible area. Fallback to 100vh for older browsers. */
+.upload-page-container {
+  min-height: 100vh;          /* fallback for older browsers */
+  min-height: 100dvh;         /* actual visible viewport, excludes browser chrome */
+  box-sizing: border-box;
+}
+
+.app-root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+
 /* --- 1. Organic Twinkling Stars --- */
 @keyframes twinkle {
 
