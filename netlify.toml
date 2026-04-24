@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
+# Only deploy to production from main branch
+# dev branch pushes will NOT trigger Netlify deployment
+[context.production]
+  branch = "main"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
