@@ -359,12 +359,15 @@ function App() {
     let animationFrameId;
     let ships = [], stars = [], galaxyParticles = [];
 
+    // Mobile detection — reduce particles heavily on small/touch screens
+    const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
+
     const setCanvasSize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    let mouse = { x: -1000, y: -1000, radius: 180 };
-    const handleMouseMove = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
+    let mouse = { x: -1000, y: -1000, radius: isMobile ? 0 : 180 };
+    const handleMouseMove = (e) => { if (!isMobile) { mouse.x = e.clientX; mouse.y = e.clientY; } };
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseout', () => { mouse.x = -1000; mouse.y = -1000; });
 
@@ -388,7 +391,7 @@ function App() {
         let x = this.centerX + Math.cos(this.angle) * this.distance;
         let y = this.centerY + Math.sin(this.angle) * this.distance;
         ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(x, y, this.size, 0, Math.PI * 2);
-        if (this.distance < 250) { ctx.shadowBlur = 10; ctx.shadowColor = this.color; } else { ctx.shadowBlur = 0; }
+        if (!isMobile && this.distance < 250) { ctx.shadowBlur = 10; ctx.shadowColor = this.color; } else { ctx.shadowBlur = 0; }
         ctx.fill(); ctx.shadowBlur = 0;
       }
     }
@@ -426,7 +429,7 @@ function App() {
           ctx.quadraticCurveTo(this.x, this.y, this.x - this.size, this.y);
           ctx.quadraticCurveTo(this.x, this.y, this.x, this.y - this.size);
         } else { ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); }
-        if (this.opacity > 0.8) { ctx.shadowBlur = this.isGiant ? 15 : 5; ctx.shadowColor = `rgba(${this.colorStr} 1)`; }
+        if (!isMobile && this.opacity > 0.8) { ctx.shadowBlur = this.isGiant ? 15 : 5; ctx.shadowColor = `rgba(${this.colorStr} 1)`; }
         ctx.fill(); ctx.shadowBlur = 0;
       }
     }
@@ -459,7 +462,7 @@ function App() {
         ctx.fillStyle = `rgba(${Math.random() * 50},${Math.random() * 150 + 100},255,0.8)`;
         ctx.beginPath(); ctx.moveTo(-this.size, 0); ctx.lineTo(-this.size - (Math.random() * 20 + 15), -this.size / 2.5); ctx.lineTo(-this.size - (Math.random() * 20 + 15), this.size / 2.5); ctx.fill();
         ctx.fillStyle = this.color; ctx.beginPath(); ctx.moveTo(this.size * 2.5, 0); ctx.lineTo(-this.size, -this.size); ctx.lineTo(-this.size * 0.5, 0); ctx.lineTo(-this.size, this.size); ctx.closePath();
-        ctx.shadowBlur = 15; ctx.shadowColor = this.color; ctx.fill();
+        if (!isMobile) { ctx.shadowBlur = 15; ctx.shadowColor = this.color; } ctx.fill();
         ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.beginPath(); ctx.arc(this.size * 0.5, 0, this.size * 0.25, 0, Math.PI * 2); ctx.fill();
         ctx.restore();
       }
@@ -467,9 +470,12 @@ function App() {
 
     const init = () => {
       galaxyParticles = []; stars = []; ships = [];
-      for (let i = 0; i < 1500; i++) galaxyParticles.push(new GalaxyParticle());
-      for (let i = 0; i < 300; i++) stars.push(new Star());
-      for (let i = 0; i < 7; i++) ships.push(new Spaceship());
+      const gpCount = isMobile ? 250 : 1500;
+      const starCount = isMobile ? 70 : 300;
+      const shipCount = isMobile ? 2 : 7;
+      for (let i = 0; i < gpCount; i++) galaxyParticles.push(new GalaxyParticle());
+      for (let i = 0; i < starCount; i++) stars.push(new Star());
+      for (let i = 0; i < shipCount; i++) ships.push(new Spaceship());
     };
 
     const animate = () => {
